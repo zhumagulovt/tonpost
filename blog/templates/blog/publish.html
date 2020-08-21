@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Публиковать{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/publish.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h2 class="mt-3">Создание публикации</h2>
+
+<form novalidate method="POST" action="">
+<div class="aside-content shadow mt-5">
+  {% csrf_token %}
+  <div class="form-group">
+    <label class="labelfor" for="title">Название</label>
+    <input class="form-control" type="text" id="title" name="title">
+    <span class="errortitle" aria-live="polite"></span><br><br>
+    <label class="labelfor" for="post">Основная часть</label>
+    <textarea class="form-control post" id="post" name="post" rows="10" cols="45"></textarea>
+    <span class="errorpost" aria-live="polite"></span>
+  </div>
+</div>
+
+<div class="clear mt-3">
+  <button type="submit" class="darkBtn">Создать</button>
+</div>
+</form>
+
+<script src = "{% static 'js/publish.js' %}"></script>
+
+</div>
+
+{% endblock %}

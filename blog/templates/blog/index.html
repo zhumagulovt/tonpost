@@ -1,0 +1,77 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+      {% if user.is_authenticated %}
+        <h1 class="h1 mb-3 font-weight-normal center-word">TonPost</h1>
+      {% else %}
+
+        <section class="jumbotron text-center">
+            <div class="container">
+              <h1 class="jumbotron-heading">TonPost</h1>
+              <p class="lead text-muted">Здесь вы можете читать, оценивать статьи других пользователей, а также самому публиковать статьи.</p>
+              <p>
+                <a href="/publish" class="btn btn-primary my-2">Публиковать статью</a>
+                <a href="/about" class="btn btn-secondary my-2">О нас</a>
+              </p>
+            </div>
+        </section>
+
+      {% endif %}
+      <div class="container">
+
+        <div class="col-md-12 aside-content">
+            <div class="tab">
+                <button id="follows_button" class="tablinks" onclick="openTab(event, 'Follows')">Подписки</button>
+                <button id="recommendation_button" class="tablinks active" onclick="openTab(event, 'Recommendation')">Рекомендации</button>
+            </div>
+            <div id="Follows" class="tabcontent">
+                {% for post in object_list %}
+                    <h1>{{ post.title }}</h1>
+
+                    <p>{{ post.content|slice:450 }}...</p>
+                    <a href="{% url 'blog:post' post.id %}" class="btn btn-dark my-2">Читать</a>
+                    <div>
+                        <span class="badge badge-info">Автор: {{ post.author }}</span><br>
+                        <span class="badge badge-secondary">Дата: {{ post.date|date:"d-m-Y" }}</span><br>
+                        <span class="badge badge-secondary">Просмотры: {{ post.views }}</span>
+                    </div>
+                    <hr>
+                {% empty %}
+                    <h3>Ваша лента пуста потому что вы ни на кого не подписаны</h3>
+                {% endfor %}
+            </div>
+
+            <div id="Recommendation" class="tabcontent">
+                {% for post in last_posts %}
+                    <h1>{{ post.title }}</h1>
+                    <p>{{ post.content|slice:450 }}...</p>
+                    <a href="{% url 'blog:post' post.id %}" class="btn btn-dark my-2">Читать</a>
+                    <div>
+                        <span class="badge badge-info">Автор: {{ post.author }}</span><br>
+                        <span class="badge badge-secondary">Дата: {{ post.date|date:"d-m-Y" }}</span><br>
+                        <span class="badge badge-secondary">Просмотры: {{ post.views }}</span>
+                    </div>
+                    <hr>
+                {% empty %}
+                    <h3>Ваша лента пуста потому что вы ни на кого не подписаны</h3>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="sidebar">
+
+              <h5>Самые популярные посты за последние сутки</h5>
+              <hr class="line" size="4">
+              <ul class="list-group">
+                  {% for post in popular %}
+                      <li class="list-group-item"><a class="text-link" href="{% url 'blog:post' post.id %}">{{post.title}}</a><span class="views">{{ post.views }}</span></li>
+                  {% endfor %}
+              </ul>
+
+        </div>
+      </div>
+
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}{{ username }}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm m-5">
+
+        <!-- Модальное окно подписчиков -->
+        <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="followersModalTitle">Подписчики</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group">
+                  {% for f in followers %}
+                    <li class="list-group-item"><a class="text-link" href="{% url 'polls:get_user' f.username %}">{{f.username}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Модальное окно подписок -->
+        <div class="modal fade" id="subscriptionsModal" tabindex="-1" role="dialog" aria-labelledby="subscriptionsModalTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="subscriptionsModalTitle">Подписки</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group">
+                  {% for f in subs %}
+                    <li class="list-group-item"><a class="text-link" href="{% url 'polls:get_user' f.username %}">{{f.username}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {% if is_profile %}
+          <h1 class="center-word">{{ username }}</h1><br/>
+          <a href="">Редактировать профиль</a>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><button type="button" class="linkbtn text-link" data-toggle="modal" data-target="#followersModal">Подписчики</button></th>
+                <th scope="col"><button type="button" class="linkbtn text-link" data-toggle="modal" data-target="#subscriptionsModal">Подписки</button></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ followers_len }}</th>
+                <th scope="row">{{ subs_len }}</th>
+              </tr>
+            </tbody>
+          </table>
+
+          {% else %}
+
+            <h1 class="center-word">{{ username }}</h1><br/>
+            {% if user.is_authenticated %}
+            <form action="{% url 'polls:subscribe' title %}" method="POST">
+              {% csrf_token %}
+              <input class="darkBtn" type="submit" value="{{ btn }}" name="subscribe"/>
+            </form>
+            {% else %}
+            <a href="/signin">Войдите</a> чтобы подписаться
+            {% endif %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"><button type="button" class="linkbtn text-link" data-toggle="modal" data-target="#followersModal">Подписчики</button></th>
+                    <th scope="col"><button type="button" class="linkbtn text-link" data-toggle="modal" data-target="#subscriptionsModal">Подписки</button></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ followers_len }}</th>
+                    <th scope="row">{{ subs_len }}</th>
+                  </tr>
+                </tbody>
+              </table>
+
+        {% endif %}
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

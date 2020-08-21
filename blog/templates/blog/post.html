@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="aside-content">  
+            <h1>{{ post.title }}</h1>
+            <p class="desc">{{ date }}<br>
+                Автор: {{ post.author }}<br>
+                Просмотры: {{ post.views }}</p>
+            <p>
+                {{ post.content|linebreaksbr }}
+            </p>
+        
+            <div>
+                <h4>Комментарии:</h4>
+                <hr class="line" size="4">
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'blog:add_comment' post.id %}">
+                        {% csrf_token %}
+                        <label for="comment">Оставить комментарий</label><br>
+                        <textarea class="comment" id="comment" rows="5" required name="comment"></textarea>
+                        <button type="submit">Отправить</button>
+                    </form>
+                    <br>
+                {% else %}  
+                    <a href="/signin/">Войдите</a> чтобы оставить комментарий
+                {% endif %}
+                <ul class="list-group">
+                    {% for comment in comment_list %}
+                        <li class="list-group-item">
+                            <strong>{{comment.author}}</strong>
+                            <p>{{ comment.content|linebreaksbr }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+    
+        <div class="sidebar"><h5>Самые последние посты</h5>
+            <hr class="line" size="4">
+            <ul class="list-group">
+                {% for post in last_posts %}
+                <li class="list-group-item"><a class="text-link" href="{% url 'blog:post' post.id %}">{{post.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height:100%;
+}
+
+
+.wrapper {
+    display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+    background: #242729;
+    color: #6a737c;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-control mr-sm-2{
+    height: 30px;
+}
+
+#q {
+    width: 300px; /* Ширина поля в пикселах */
+} 
+
+.center-block{
+    width: 320px;
+}
+
+.signUpBtn {
+    font-size: 20px;
+    border-radius: 7px;
+    width: 300px;
+    height: 48px;
+    color: white;
+    background: black;
+}
+
+.btn btn-lg btn-primary btn-block{
+    background:black;
+    background-color:black;
+    color:black;
+}
+
+td{
+	padding: 5px;
+	border: 1px solid;
+}
+
+.text-link{
+    color: black; /* Цвет*/
+    font-weight: bold;
+}
+
+.text-link:visited {
+    color: black; /* Цвет посещенных ссылок */
+}
+
+.text-link:active {
+    color: black; /* Цвет активных ссылок */
+}
+
+
+.txt-area{
+    width: 500px;
+}
+
+
+.aside-content{
+    overflow: hidden;
+    width: 65%;
+    float: left;
+}
+.sidebar{
+    overflow: hidden;
+    padding: 5px;
+    width: 30%;
+    float: right;
+}
+
+.clear{
+    float: left;
+    clear: both;
+}
+
+.desc{
+    font-size: 13px;
+}
+
+.center-word{
+    text-align: center;
+}
+
+.darkBtn{
+    border-radius: 7px;
+    color: white;
+    background: black;
+    padding: 5px;
+    width: 120px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.shadow{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+
+.invalid{
+    border: 1px solid red;
+}
+
+  
+input:focus:invalid {
+    outline: none;
+}
+  
+  /* Это стиль для сообщений об ошибке */
+.error {
+    font-size: small;
+    width  : 100%;
+    padding: 0;
+    color: red;
+}
+  
+.error.active {
+    padding: 0.3em;
+}
+
+.line {
+    border: none;
+    height: 2px;
+    background-color: #dddddd;
+}
+
+.comment {
+    width:100%;
+}
+
+.linkbtn{
+    border: none;
+    background-color: white;
+}
+
+.linkbtn:hover{
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+}
+
+
+.linkbtn:focus{
+    outline: none;
+    border: none;
+    background-color: white;
+}
+
+.views{
+    float: right;
+}
+
+.tablinks.active:after{
+    width: 100%;
+}
+
+.tab {
+  overflow: hidden;
+  height: 40px;
+}
+
+.tab button {
+  position: absolute;
+  padding: 4px;
+  font-size : 30px;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  line-height: 1; /*задаём высоту строки*/
+  text-decoration: none; /*убираем подчёркивание*/
+}
+
+.tab button:after {
+	display: block;
+	position: absolute;
+	left: 0; /*изменить на right:0;, чтобы изменить направление подчёркивания */
+	width: 0;/*задаём длинну линии до наведения курсора*/
+	height: 2px; /*задаём ширину линии*/
+	background-color: #000000; /*задаём цвет линии*/
+	content: "";
+	transition: width 0.3s ease-out; /*задаём время анимации*/
+}
+
+.tab button:hover:after,
+.tab button:focus:after{
+    width: 100%;
+}
+
+/* Style the tab content */
+.tabcontent {
+  clear: bottom;
+  padding: 10px;
+  display: none;
+  border: 1px solid #f1f1f1;
+  border-top: none;
+  border-bottom: none;
+}
+
+#follows_button {
+  right: 330px;
+}
+
+#recommendation_button {
+  right: 85px;
+}
+
+#Recommendation{
+  display: block;
+}
+
+

@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Поиск постов{% endblock %}
+{% block content %}
+
+<br>
+<form class="center-block" style="margin:0 auto;" method="GET" action="">
+  <h1 class="h3 mb-3 font-weight-normal">Поиск постов</h1>
+  <div class="form-group">
+      <input class="form-control" type="text" name="q" id="q" placeholder="Искать публикацию" required=""><br>
+      <button>Искать</button>
+  </div>
+</form>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm m-5">
+      <h2>Результаты поиска</h2>
+      <table class="table">
+        <tbody>
+          {% for post in object_list %}
+          <tr>
+            <th scope="row">
+              <a class="text-link" href="{% url 'blog:post' post.id %}">
+              Название: {{ post.title }}<br>
+              Автор: {{ post.author }}</a><br>
+              Просмотры: {{ post.views }}
+            </th>
+          </tr>
+          {% empty %}
+          Публикации с указанным названием не существует.
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="/user/search/">Поиск пользователей</a>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
+
+
+<script
+  src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+
+
+{% endblock %}
